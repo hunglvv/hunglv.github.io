@@ -6,6 +6,19 @@ sealed interface Route {
     @Serializable
     data object Portfolio : Route
 
+    @Serializable
+    data object  Home: Route
 
+    @Serializable
+    data object About: Route
+
+    @Serializable
+    data object Resume: Route
+
+    @Serializable
+    data object Skills: Route
+
+    @Serializable
+    data object Settings: Route
 
 }

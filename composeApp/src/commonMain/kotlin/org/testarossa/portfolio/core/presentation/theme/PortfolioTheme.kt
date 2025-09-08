@@ -16,7 +16,20 @@ val LightColorTheme = lightColorScheme(
     surfaceContainerLowest = SurfaceLowest,
     background = Background,
     onSurface = OnSurface,
-    onSurfaceVariant = OnSurfaceVariant
+    onSurfaceVariant = OnSurfaceVariant,
+    secondary = Secondary,
+    onSecondary = OnSecondary
+)
+
+val DarkColorScheme = lightColorScheme(
+    primary = BackgroundDark,
+    surface = PrimaryDark,
+    surfaceContainerLowest = SurfaceDark,
+    background = OnSurfaceDark,
+    onSurface = OnSurfaceVariantDark,
+    onSurfaceVariant = SurfaceLowestDark,
+    secondary = SecondaryDark,
+    onSecondary = OnSecondaryDark
 )
 
 @Composable
@@ -30,15 +43,23 @@ val ColorScheme.extraColor: Color @Composable get() = extendedColor(
 )
 
 val Shapes = Shapes(
-    extraSmall = RoundedCornerShape(5.dp),
-    medium = RoundedCornerShape(15.dp)
+    extraSmall = RoundedCornerShape(4.dp),
+    small = RoundedCornerShape(8.dp),
+    medium = RoundedCornerShape(12.dp),
+    large = RoundedCornerShape(16.dp),
+    extraLarge = RoundedCornerShape(24.dp)
 )
 @Composable
 fun PortfolioTheme(
+    darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
+    val colorScheme = when {
+        darkTheme -> DarkColorScheme
+        else -> LightColorTheme
+    }
     MaterialTheme(
-        colorScheme = LightColorTheme,
+        colorScheme = colorScheme,
         typography = Typography,
         shapes = Shapes,
         content = content
