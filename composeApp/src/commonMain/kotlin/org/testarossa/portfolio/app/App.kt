@@ -4,28 +4,37 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionLayout
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.consumeWindowInsets
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBars
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.rememberNavController
-import androidx.window.core.layout.WindowWidthSizeClass
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.testarossa.portfolio.core.presentation.theme.PortfolioTheme
+import org.testarossa.portfolio.core.presentation.utils.isDesktopSize
 import org.testarossa.portfolio.portfolio.presentation.navigation_bar.BottomNavigationBar
+import org.testarossa.portfolio.portfolio.presentation.navigation_bar.NavigationBarRail
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
@@ -38,18 +47,19 @@ fun App() {
     PortfolioTheme(darkTheme = darkTheme) {
 
         val navController = rememberNavController()
-        val windowSizeClass = currentWindowAdaptiveInfo().windowSizeClass
-        val widthClass = windowSizeClass.windowWidthSizeClass
 
         Scaffold(
             modifier = Modifier.fillMaxSize(),
             bottomBar = {
-                AnimatedVisibility(visible = widthClass == WindowWidthSizeClass.COMPACT) {
+                AnimatedVisibility(visible = !isDesktopSize()) {
                     BottomNavigationBar(
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(IntrinsicSize.Min),
+                        currentRoute = Route.Home,
                         onNavigateTo = { route ->
-                            navController.navigate(route){
-                                popUpTo(navController.graph.findStartDestination().id){
+                            navController.navigate(route) {
+                                popUpTo(navController.graph.findStartDestination().id) {
                                     inclusive = true
                                 }
                                 launchSingleTop = true
@@ -63,30 +73,39 @@ fun App() {
         ) { innerPadding ->
             val rootModifier = Modifier
                 .fillMaxSize()
-                .padding(innerPadding)
+                .padding(if (!isDesktopSize()) innerPadding.calculateBottomPadding() else 0.dp)
                 .background(MaterialTheme.colorScheme.surfaceContainerLowest)
-                .padding(
-                    horizontal = 16.dp,
-                    vertical = 24.dp
-                )
                 .consumeWindowInsets(WindowInsets.navigationBars)
 
-            when (widthClass) {
-                WindowWidthSizeClass.COMPACT -> {
-
-                }
-
-                WindowWidthSizeClass.MEDIUM -> {
-
-                }
-
-                WindowWidthSizeClass.EXPANDED -> {
-
-                }
-            }
 
             SharedTransitionLayout(modifier = rootModifier) {
-
+                if (isDesktopSize()) {
+                    Row(
+                        modifier = rootModifier,
+                        horizontalArrangement = Arrangement.spacedBy(12.dp)
+                    ) {
+                        NavigationBarRail(
+                            modifier = Modifier.fillMaxWidth(1 / 6f).fillMaxHeight(),
+                            currentRoute = Route.Home,
+                            onNavigateTo = { route ->
+                                navController.navigate(route) {
+                                    popUpTo(navController.graph.findStartDestination().id) {
+                                        inclusive = true
+                                    }
+                                    launchSingleTop = true
+                                    restoreState = true
+                                }
+                            }
+                        )
+                        Box(modifier = Modifier.weight(1f).fillMaxHeight().background(Color.Gray)) {
+                            Text("Content")
+                        }
+                    }
+                } else {
+                    Box(modifier = rootModifier) {
+                        Text("Content")
+                    }
+                }
             }
 
         }
