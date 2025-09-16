@@ -2,12 +2,12 @@ package org.testarossa.portfolio.app
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalSharedTransitionApi
-import androidx.compose.animation.SharedTransitionLayout
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.displayCutout
@@ -23,40 +23,54 @@ import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import coil3.compose.setSingletonImageLoaderFactory
 import org.jetbrains.compose.ui.tooling.preview.Preview
-import org.testarossa.portfolio.core.presentation.theme.CompactPadding
+import org.koin.compose.viewmodel.koinViewModel
+import org.testarossa.portfolio.core.presentation.theme.MediumPadding
 import org.testarossa.portfolio.core.presentation.theme.PortfolioTheme
 import org.testarossa.portfolio.core.presentation.utils.BuildAdaptiveContent
+import org.testarossa.portfolio.core.presentation.utils.getAsyncImageLoader
 import org.testarossa.portfolio.core.presentation.utils.isCompactHeight
 import org.testarossa.portfolio.core.presentation.utils.isCompactWidth
+import org.testarossa.portfolio.core.presentation.utils.navigateToScreen
+import org.testarossa.portfolio.portfolio.presentation.home.HomeScreenRoot
+import org.testarossa.portfolio.portfolio.presentation.navigation_bar.AppAction
+import org.testarossa.portfolio.portfolio.presentation.navigation_bar.AppViewModel
 import org.testarossa.portfolio.portfolio.presentation.navigation_bar.BottomNavigationBar
 import org.testarossa.portfolio.portfolio.presentation.navigation_bar.NavigationBarRail
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 @Preview
-fun App() {
-    val darkTheme by rememberSaveable {
-        mutableStateOf(false)
+fun App(
+    appViewModel: AppViewModel = koinViewModel()
+) {
+    val navController = rememberNavController()
+    val state by appViewModel.state.collectAsStateWithLifecycle()
+
+    LaunchedEffect(state.currentRoute) {
+        state.currentRoute?.let { route ->
+            navController.navigateToScreen(route)
+        }
     }
 
-    PortfolioTheme(darkTheme = darkTheme) {
+    setSingletonImageLoaderFactory { context ->
+        getAsyncImageLoader(context)
+    }
 
-        val navController = rememberNavController()
-        var currentRoute: Route by remember {
-            mutableStateOf(Route.Home)
-        }
+    PortfolioTheme(darkTheme = state.isDarkMode) {
+        val currentRoute =  state.currentRoute ?: Route.Home
         Scaffold(
             bottomBar = {
                 AnimatedVisibility(visible = isCompactWidth()) {
@@ -65,18 +79,12 @@ fun App() {
                             .fillMaxWidth()
                             .height(IntrinsicSize.Min)
                             .background(MaterialTheme.colorScheme.surfaceContainer)
-                            .padding(horizontal = CompactPadding),
+                            .padding(horizontal = MediumPadding),
                         currentRoute = currentRoute,
                         onNavigateTo = { route ->
-                            currentRoute = route
-                            /*navController.navigate(route) {
-                                popUpTo(navController.graph.findStartDestination().id) {
-                                    inclusive = true
-                                }
-                                launchSingleTop = true
-                                restoreState = true
-                            }*/
-                        })
+                            appViewModel.onAction(AppAction.OnRouteChange(route))
+                        }
+                    )
                 }
 
             },
@@ -91,38 +99,48 @@ fun App() {
                 .background(MaterialTheme.colorScheme.background)
                 .consumeWindowInsets(WindowInsets.navigationBars)
 
-            SharedTransitionLayout {
-                BuildAdaptiveContent(
-                    expandContent = {
-                        NavigationRailContent(
-                            modifier = rootModifier.then(
-                                if (isCompactHeight()) Modifier.windowInsetsPadding(WindowInsets.displayCutout)
-                                else Modifier
-                            ),
-                            expand = true,
-                            currentRoute = currentRoute,
-                            onNavigateTo = { route ->
-                                currentRoute = route
-                            }
-                        )
-                    },
-                    mediumContent = {
-                        NavigationRailContent(
-                            modifier = rootModifier,
-                            expand = false,
-                            currentRoute = currentRoute,
-                            onNavigateTo = { route ->
-                                currentRoute = route
-                            }
-                        )
-                    },
-                    compactContent = {
+
+            BuildAdaptiveContent(
+                expandContent = {
+                    NavigationRailContent(
+                        modifier = rootModifier.then(
+                            if (isCompactHeight()) Modifier.windowInsetsPadding(WindowInsets.displayCutout)
+                            else Modifier
+                        ),
+                        isExpanded = true,
+                        currentRoute = currentRoute,
+                        onNavigateTo = { route ->
+                            appViewModel.onAction(AppAction.OnRouteChange(route))
+                        }
+                    ) {
                         Content(
-                            modifier = rootModifier
+                            modifier = Modifier.weight(1f).fillMaxHeight(),
+                            navController = navController
                         )
                     }
-                )
-            }
+                },
+                mediumContent = {
+                    NavigationRailContent(
+                        modifier = rootModifier,
+                        isExpanded = false,
+                        currentRoute = currentRoute,
+                        onNavigateTo = { route ->
+                            appViewModel.onAction(AppAction.OnRouteChange(route))
+                        }
+                    ) {
+                        Content(
+                            modifier = Modifier.weight(1f).fillMaxHeight(),
+                            navController = navController
+                        )
+                    }
+                },
+                compactContent = {
+                    Content(
+                        modifier = rootModifier,
+                        navController = navController
+                    )
+                }
+            )
 
         }
     }
@@ -131,10 +149,13 @@ fun App() {
 @Composable
 private fun NavigationRailContent(
     modifier: Modifier = Modifier,
-    expand: Boolean,
+    isExpanded: Boolean,
     currentRoute: Route,
-    onNavigateTo: (Route) -> Unit
+    onNavigateTo: (Route) -> Unit,
+    content: @Composable RowScope.() -> Unit
 ) {
+
+
     Row(
         modifier = modifier,
         horizontalArrangement = Arrangement.spacedBy(12.dp)
@@ -142,7 +163,7 @@ private fun NavigationRailContent(
         NavigationBarRail(
             modifier = Modifier
                 .then(
-                    if (expand) {
+                    if (isExpanded) {
                         Modifier.width(240.dp)
                     } else {
                         Modifier.width(IntrinsicSize.Min)
@@ -150,65 +171,46 @@ private fun NavigationRailContent(
                 )
                 .fillMaxHeight()
                 .background(MaterialTheme.colorScheme.surfaceContainer),
-            expandSize = expand,
+            isExpanded = isExpanded,
             currentRoute = currentRoute,
             onNavigateTo = onNavigateTo
         )
-        Content(
-            modifier = Modifier.weight(1f).fillMaxHeight()
-        )
+        content()
     }
 }
 
 @Composable
 private fun Content(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    navController: NavHostController
 ) {
-    val windowSizeClass = currentWindowAdaptiveInfo().windowSizeClass
-    val widthSizeClass = windowSizeClass.windowWidthSizeClass
-    val heightSizeClass = windowSizeClass.windowHeightSizeClass
-    Box(
+    NavHost(
         modifier = modifier,
-        contentAlignment = Alignment.Center
+        navController = navController,
+        startDestination = Route.Home
     ) {
-        Text(text = "Content : $widthSizeClass - $heightSizeClass")
+        composable<Route.Home> {
+            HomeScreenRoot()
+        }
+        composable<Route.About> {
+            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                Text("About")
+            }
+        }
+        composable<Route.Resume> {
+            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                Text("Resume")
+            }
+        }
+        composable<Route.Skills> {
+            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                Text("Skills")
+            }
+        }
+        composable<Route.Settings> {
+            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                Text("Settings")
+            }
+        }
     }
 }
-
-//when(deviceConfiguration) {
-//                DeviceConfiguration.TABLET_PORTRAIT,
-//                DeviceConfiguration.MOBILE_PORTRAIT -> {
-//                    Column(
-//                        modifier = rootModifier,
-//                        horizontalAlignment = Alignment.CenterHorizontally,
-//                        verticalArrangement = Arrangement.spacedBy(32.dp)
-//                    ) {
-//
-//                    }
-//                }
-//                DeviceConfiguration.MOBILE_LANDSCAPE -> {
-//                    Row(
-//                        modifier = rootModifier
-//                            .windowInsetsPadding(WindowInsets.displayCutout)
-//                            .padding(
-//                                horizontal = 32.dp
-//                            ),
-//                        horizontalArrangement = Arrangement.spacedBy(32.dp),
-//                        verticalAlignment = Alignment.CenterVertically
-//                    ) {
-//
-//                    }
-//                }
-//                DeviceConfiguration.TABLET_LANDSCAPE,
-//                DeviceConfiguration.DESKTOP -> {
-//                    Column(
-//                        modifier = rootModifier
-//                            .verticalScroll(rememberScrollState())
-//                            .padding(top = 48.dp),
-//                        verticalArrangement = Arrangement.spacedBy(32.dp),
-//                        horizontalAlignment = Alignment.CenterHorizontally
-//                    ) {
-//
-//                    }
-//                }
-//            }

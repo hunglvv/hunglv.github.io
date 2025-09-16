@@ -7,6 +7,7 @@ import org.koin.core.annotation.Module
 import org.testarossa.portfolio.portfolio.data.KtorPortfolioRepository
 import org.testarossa.portfolio.portfolio.domain.PortfolioRepository
 import org.testarossa.portfolio.portfolio.presentation.PortfolioViewModel
+import org.testarossa.portfolio.portfolio.presentation.navigation_bar.AppViewModel
 
 @Module
 class PortfolioModule  {
@@ -19,4 +20,8 @@ class PortfolioModule  {
     fun portfolioViewModel(
         repository: PortfolioRepository
     ) = PortfolioViewModel(repository)
+
+    @KoinViewModel
+    fun appViewModel() = AppViewModel()
+
 }

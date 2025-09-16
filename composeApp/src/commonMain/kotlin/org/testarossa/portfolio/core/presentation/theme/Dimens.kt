@@ -2,6 +2,9 @@ package org.testarossa.portfolio.core.presentation.theme
 
 import androidx.compose.ui.unit.dp
 
-val CompactPadding = 16.dp
-val MediumPadding = 24.dp
-val ExpandedPadding = 32.dp
+val SmallPadding = 4.dp
+val NormalPadding = 8.dp
+val MediumPadding = 16.dp
+val ExpandPadding = 24.dp
+
+val LargePadding = 32.dp

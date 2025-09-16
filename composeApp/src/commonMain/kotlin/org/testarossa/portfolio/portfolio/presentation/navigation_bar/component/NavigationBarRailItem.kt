@@ -19,8 +19,8 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun NavigationBarRailItem(
     modifier: Modifier = Modifier,
-    expand: Boolean,
-    selected: Boolean,
+    isExpanded: Boolean,
+    isSelected: Boolean,
     imageVector: ImageVector,
     label: String,
     onClick: () -> Unit,
@@ -29,9 +29,9 @@ fun NavigationBarRailItem(
         modifier = modifier,
         onClick = onClick,
         shape = RoundedCornerShape(100.dp),
-        color = if (selected) MaterialTheme.colorScheme.tertiaryContainer else Color.Transparent,
+        color = if (isSelected) MaterialTheme.colorScheme.tertiaryContainer else Color.Transparent,
     ) {
-        if (expand) {
+        if (isExpanded) {
             Row(
                 modifier = Modifier.padding(vertical = 12.dp, horizontal = 8.dp),
                 horizontalArrangement = Arrangement.spacedBy(12.dp),
@@ -40,15 +40,13 @@ fun NavigationBarRailItem(
                 Icon(
                     imageVector,
                     contentDescription = label,
-                    tint = if (selected) MaterialTheme.colorScheme.onTertiaryContainer
-                    else MaterialTheme.colorScheme.onSurface
+                    tint = getColor(isSelected)
                 )
 
                 Text(
                     text = label,
                     style = MaterialTheme.typography.labelSmall,
-                    color = if (selected) MaterialTheme.colorScheme.onTertiaryContainer
-                    else MaterialTheme.colorScheme.onSurface
+                    color = getColor(isSelected)
                 )
 
             }
@@ -61,17 +59,20 @@ fun NavigationBarRailItem(
                 Icon(
                     imageVector,
                     contentDescription = label,
-                    tint = if (selected) MaterialTheme.colorScheme.onTertiaryContainer
-                    else MaterialTheme.colorScheme.onSurface
+                    tint = getColor(isSelected)
                 )
 
                 Text(
                     text = label,
                     style = MaterialTheme.typography.labelSmall,
-                    color = if (selected) MaterialTheme.colorScheme.onTertiaryContainer
-                    else MaterialTheme.colorScheme.onSurface
+                    color = getColor(isSelected)
                 )
             }
         }
     }
 }
+
+@Composable
+private fun getColor(isSelected: Boolean) =
+    if (isSelected) MaterialTheme.colorScheme.onTertiaryContainer
+    else MaterialTheme.colorScheme.onSurface

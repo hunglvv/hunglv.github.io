@@ -1,0 +1,35 @@
+package org.testarossa.portfolio.portfolio.presentation.navigation_bar
+
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.flow.update
+import org.testarossa.portfolio.core.presentation.BaseViewModel
+import org.testarossa.portfolio.core.presentation.utils.stateWhileSubscribed
+
+
+class AppViewModel (
+
+): BaseViewModel(){
+    private val _events = Channel<AppAction>()
+    val event = _events.receiveAsFlow()
+
+    private val _state = MutableStateFlow(AppState())
+    val state = _state
+        .onStart {
+
+        }.stateWhileSubscribed(viewModelScope, _state.value)
+
+
+    fun onAction(action: AppAction) {
+        onDebounceTask {
+            when(action){
+                is AppAction.OnDarkModeChange -> _state.update { it.copy(isDarkMode = action.isDarkMode) }
+                is AppAction.OnLanguageChange -> _state.update { it.copy(currentLanguage = action.language) }
+                is AppAction.OnRouteChange -> _state.update { it.copy(currentRoute = action.route) }
+            }
+        }
+    }
+}
