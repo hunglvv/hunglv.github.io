@@ -29,6 +29,7 @@ fun BottomNavigationBarItem(
     Surface(
         onClick = onClick,
         modifier = modifier,
+        color = Color.Transparent
     ){
         Column(
             modifier = Modifier
@@ -39,14 +40,15 @@ fun BottomNavigationBarItem(
             Icon(
                 imageVector,
                 contentDescription = label,
-                tint = if (selected) MaterialTheme.colorScheme.onSecondary else MaterialTheme.colorScheme.onSurface
+                tint = if (selected) MaterialTheme.colorScheme.primary
+                else MaterialTheme.colorScheme.onSurface
             )
             if (selected){
                 Text(
                     modifier= Modifier.padding(top = 2.dp),
                     text = label,
                     style = MaterialTheme.typography.labelSmall,
-                    color = MaterialTheme.colorScheme.onSecondary
+                    color = MaterialTheme.colorScheme.primary
                 )
             }
 

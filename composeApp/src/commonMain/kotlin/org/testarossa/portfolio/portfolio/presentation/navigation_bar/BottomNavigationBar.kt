@@ -29,6 +29,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.testarossa.portfolio.app.Route
 import org.testarossa.portfolio.core.presentation.theme.PortfolioTheme
 import org.testarossa.portfolio.portfolio.presentation.navigation_bar.component.BottomNavigationBarItem
+import org.testarossa.portfolio.portfolio.presentation.navigation_bar.component.NavigationBarRailItem
 
 @Composable
 fun BottomNavigationBar(
@@ -41,41 +42,15 @@ fun BottomNavigationBar(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center
     ) {
-        BottomNavigationBarItem(
-            modifier = Modifier.fillMaxHeight().weight(1f),
-            selected = currentRoute == Route.Home,
-            imageVector = Icons.Default.Home,
-            label = stringResource(Res.string.home),
-            onClick = { onNavigateTo(Route.Home) }
-        )
-        BottomNavigationBarItem(
-            modifier = Modifier.fillMaxHeight().weight(1f),
-            selected = currentRoute == Route.About,
-            imageVector = Icons.Default.Person,
-            label = stringResource(Res.string.about),
-            onClick = { onNavigateTo(Route.About) }
-        )
-        BottomNavigationBarItem(
-            modifier = Modifier.fillMaxHeight().weight(1f),
-            selected = currentRoute == Route.Resume,
-            imageVector = Icons.AutoMirrored.Default.Article,
-            label = stringResource(Res.string.resume),
-            onClick = { onNavigateTo(Route.Resume) }
-        )
-        BottomNavigationBarItem(
-            modifier = Modifier.fillMaxHeight().weight(1f),
-            selected = currentRoute == Route.Skills,
-            imageVector = Icons.Default.DesignServices,
-            label = stringResource(Res.string.skill),
-            onClick = { onNavigateTo(Route.Skills) }
-        )
-        BottomNavigationBarItem(
-            modifier = Modifier.fillMaxHeight().weight(1f),
-            selected = currentRoute == Route.Settings,
-            imageVector = Icons.Default.Settings,
-            label = stringResource(Res.string.settings),
-            onClick = { onNavigateTo(Route.Settings) }
-        )
+        AppDestinations.entries.forEach { destination ->
+            BottomNavigationBarItem(
+                modifier = Modifier.fillMaxHeight().weight(1f),
+                selected = currentRoute == destination.route,
+                imageVector = destination.icon,
+                label = stringResource(destination.label),
+                onClick = { onNavigateTo(destination.route) }
+            )
+        }
     }
 }
 

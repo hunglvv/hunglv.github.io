@@ -2,10 +2,8 @@ package org.testarossa.portfolio.core.presentation.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.sp
 import myportfolio.composeapp.generated.resources.Res
 import myportfolio.composeapp.generated.resources.inter_400
 import myportfolio.composeapp.generated.resources.inter_500
@@ -21,36 +19,21 @@ val Inter @Composable get() = FontFamily(
         weight = FontWeight.Medium
     ),
 )
-
+val baseline = Typography()
 val Typography: Typography @Composable get() = Typography(
-    bodyLarge = TextStyle(
-        fontFamily = Inter,
-        fontWeight = FontWeight.Normal,
-        fontSize = 17.sp,
-        lineHeight = 24.sp
-    ),
-    bodyMedium = TextStyle(
-        fontFamily = Inter,
-        fontWeight = FontWeight.Medium,
-        fontSize = 15.sp,
-        lineHeight = 20.sp
-    ),
-    bodySmall = TextStyle(
-        fontFamily = Inter,
-        fontWeight = FontWeight.Normal,
-        fontSize = 15.sp,
-        lineHeight = 20.sp
-    ),
-    titleLarge = TextStyle(
-        fontFamily = Inter,
-        fontWeight = FontWeight.Bold,
-        fontSize = 32.sp,
-        lineHeight = 36.sp
-    ),
-    titleSmall = TextStyle(
-        fontFamily = Inter,
-        fontWeight = FontWeight.Medium,
-        fontSize = 17.sp,
-        lineHeight = 24.sp
-    ),
+    displayLarge = baseline.displayLarge.copy(fontFamily = Inter),
+    displayMedium = baseline.displayMedium.copy(fontFamily = Inter),
+    displaySmall = baseline.displaySmall.copy(fontFamily = Inter),
+    headlineLarge = baseline.headlineLarge.copy(fontFamily = Inter),
+    headlineMedium = baseline.headlineMedium.copy(fontFamily = Inter),
+    headlineSmall = baseline.headlineSmall.copy(fontFamily = Inter),
+    titleLarge = baseline.titleLarge.copy(fontFamily = Inter),
+    titleMedium = baseline.titleMedium.copy(fontFamily = Inter),
+    titleSmall = baseline.titleSmall.copy(fontFamily = Inter),
+    bodyLarge = baseline.bodyLarge.copy(fontFamily = Inter),
+    bodyMedium = baseline.bodyMedium.copy(fontFamily = Inter),
+    bodySmall = baseline.bodySmall.copy(fontFamily = Inter),
+    labelLarge = baseline.labelLarge.copy(fontFamily = Inter),
+    labelMedium = baseline.labelMedium.copy(fontFamily = Inter),
+    labelSmall = baseline.labelSmall.copy(fontFamily = Inter),
 )
