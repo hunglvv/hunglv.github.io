@@ -1,4 +1,4 @@
-package org.testarossa.portfolio.portfolio.presentation.navigation_bar
+package org.testarossa.portfolio.portfolio.domain
 
 enum class SocialContacts(
     val thumb: String,

@@ -6,9 +6,9 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import org.jetbrains.compose.resources.stringResource
 import org.testarossa.portfolio.app.Route
 import org.testarossa.portfolio.core.presentation.rememberStrings
+import org.testarossa.portfolio.portfolio.domain.AppDestinations
 import org.testarossa.portfolio.portfolio.presentation.navigation_bar.component.BottomNavigationBarItem
 
 @Composable

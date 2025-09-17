@@ -1,4 +1,4 @@
-package org.testarossa.portfolio.portfolio.presentation.navigation_bar
+package org.testarossa.portfolio.portfolio.domain
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Article

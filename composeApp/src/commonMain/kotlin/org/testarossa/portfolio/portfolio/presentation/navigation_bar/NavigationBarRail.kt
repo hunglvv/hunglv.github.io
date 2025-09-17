@@ -19,6 +19,7 @@ import org.testarossa.portfolio.app.Route
 import org.testarossa.portfolio.core.presentation.rememberStrings
 import org.testarossa.portfolio.core.presentation.theme.ExpandPadding
 import org.testarossa.portfolio.core.presentation.utils.isCompactHeight
+import org.testarossa.portfolio.portfolio.domain.AppDestinations
 import org.testarossa.portfolio.portfolio.presentation.navigation_bar.component.NavigationBarRailItem
 import org.testarossa.portfolio.portfolio.presentation.navigation_bar.component.SocialButtons
 

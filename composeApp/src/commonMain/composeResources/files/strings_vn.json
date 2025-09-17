@@ -31,6 +31,12 @@
   "message": "Lời nhắn",
   "send_message": "Gửi lời nhắn",
   "theme_mode": "Chủ đề",
-  "language": "Ngôn ngữ"
+  "language": "Ngôn ngữ",
+  "technologies": "Các công nghệ tôi sử dụng",
+  "project_complete": "dự án đã hoàn thành",
+  "years_experience": "năm kình nghiệm",
+  "my_download": "Hàng triệu",
+  "total_projects": "25+",
+  "total_years": "5+"
 
 }

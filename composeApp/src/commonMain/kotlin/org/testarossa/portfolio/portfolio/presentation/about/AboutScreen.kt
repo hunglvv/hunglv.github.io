@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
@@ -27,8 +28,12 @@ import org.testarossa.portfolio.core.presentation.rememberStrings
 import org.testarossa.portfolio.core.presentation.theme.MediumPadding
 import org.testarossa.portfolio.core.presentation.theme.Shapes
 import org.testarossa.portfolio.core.presentation.utils.LocalImage
+import org.testarossa.portfolio.portfolio.domain.badges
+import org.testarossa.portfolio.portfolio.presentation.about.component.MyBadge
 import org.testarossa.portfolio.portfolio.presentation.about.component.MyInfo
+import org.testarossa.portfolio.portfolio.presentation.about.component.MyTechnologies
 import org.testarossa.portfolio.portfolio.presentation.about.component.avatar
+
 
 @Composable
 fun AboutScreen() {
@@ -63,7 +68,7 @@ fun AboutScreen() {
         ) {
             if (column < 3) {
                 avatar(
-                    modifier = Modifier.size(200.dp).clip(Shapes.medium),
+                    modifier = Modifier.size(200.dp),
                 )
             }
             item(span = { GridItemSpan(this.maxLineSpan) }) {
@@ -81,7 +86,7 @@ fun AboutScreen() {
                 item {
                     Box(modifier = Modifier.fillMaxWidth()) {
                         LocalImage(
-                            modifier = Modifier.size(200.dp).clip(Shapes.medium),
+                            modifier = Modifier.size(200.dp).clip(MaterialTheme.shapes.medium),
                             path = "drawable/img_avatar.jpg",
                             contentScale = ContentScale.Crop
                         )
@@ -95,9 +100,17 @@ fun AboutScreen() {
             }
 
             item {
-                Box(modifier = Modifier.fillMaxWidth()) {
-                    Text("Skills")
-                }
+                MyTechnologies(modifier = Modifier.fillMaxWidth())
+            }
+
+            items(badges){ badge ->
+                MyBadge(
+                    modifier = Modifier.fillMaxWidth(),
+                    isSingleColumn = column == 1,
+                    icon = badge.icon,
+                    title = localString.get(badge.title),
+                    content = localString.get(badge.content)
+                )
             }
         }
     }

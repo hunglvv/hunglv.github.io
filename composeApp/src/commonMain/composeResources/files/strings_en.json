@@ -31,6 +31,12 @@
   "message": "Message",
   "send_message": "Send message",
   "theme_mode": "Theme Mode",
-  "language": "Language"
+  "language": "Language",
+  "technologies": "Technologies I Use",
+  "project_complete": "Projects Completed",
+  "years_experience": "Years Experience",
+  "my_download": "50M+",
+  "total_projects": "25+",
+  "total_years": "5+"
 
 }

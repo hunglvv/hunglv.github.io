@@ -32,7 +32,6 @@ import org.testarossa.portfolio.core.presentation.rememberStrings
 import org.testarossa.portfolio.core.presentation.theme.LargePadding
 import org.testarossa.portfolio.core.presentation.theme.MediumPadding
 import org.testarossa.portfolio.core.presentation.theme.NormalPadding
-import org.testarossa.portfolio.core.presentation.theme.Shapes
 import org.testarossa.portfolio.core.presentation.theme.SmallPadding
 import org.testarossa.portfolio.core.presentation.utils.LocalImage
 import org.testarossa.portfolio.core.presentation.utils.isCompactHeight
@@ -56,7 +55,7 @@ fun HomeScreenRoot(
 
         Column(
             modifier = Modifier.padding(MediumPadding)
-                .background(MaterialTheme.colorScheme.surface.copy(alpha = 0.7f), Shapes.medium)
+                .background(MaterialTheme.colorScheme.surface.copy(alpha = 0.7f), MaterialTheme.shapes.medium)
                 .padding(horizontal = MediumPadding, vertical = NormalPadding)
                 .align(
                     if (isCompactWidth()) Alignment.BottomStart else Alignment.CenterStart
@@ -96,7 +95,7 @@ fun HomeScreenRoot(
                     colors = ButtonDefaults.textButtonColors(
                         containerColor = MaterialTheme.colorScheme.onSurface
                     ),
-                    shape = Shapes.small
+                    shape = MaterialTheme.shapes.small
                 ) {
                     Text(
                         text = localString.get("view_my_work"),
@@ -112,7 +111,7 @@ fun HomeScreenRoot(
                         width = 1.dp,
                         color = MaterialTheme.colorScheme.onSurface.copy(0.8f)
                     ),
-                    shape = Shapes.small
+                    shape = MaterialTheme.shapes.small
                 ) {
                     Row(
                         verticalAlignment = Alignment.CenterVertically,

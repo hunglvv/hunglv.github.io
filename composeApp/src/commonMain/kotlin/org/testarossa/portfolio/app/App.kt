@@ -52,6 +52,7 @@ import org.testarossa.portfolio.portfolio.presentation.navigation_bar.AppViewMod
 import org.testarossa.portfolio.portfolio.presentation.navigation_bar.BottomNavigationBar
 import org.testarossa.portfolio.portfolio.presentation.navigation_bar.Language
 import org.testarossa.portfolio.portfolio.presentation.navigation_bar.NavigationBarRail
+import org.testarossa.portfolio.portfolio.presentation.setting.SettingScreenRoot
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
@@ -264,16 +265,12 @@ private fun Content(
             }
         }
         composable<Route.Settings> {
-            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                TextButton(
-                    onClick = {
-                        onChangeLanguage(if (state.currentLanguage == Language.EN) Language.VI else Language.EN)
-                    }
-                ) {
-                    Text(state.currentLanguage.name)
-                }
-
-            }
+            SettingScreenRoot(
+                isDarkMode = state.isDarkMode,
+                language = state.currentLanguage,
+                onDarkModeChange = onChangeTheme,
+                onLanguageChange = onChangeLanguage
+            )
         }
     }
 }
