@@ -13,13 +13,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import myportfolio.composeapp.generated.resources.Res
-import myportfolio.composeapp.generated.resources.my_name
-import org.jetbrains.compose.resources.stringResource
 import org.testarossa.portfolio.app.Route
+import org.testarossa.portfolio.core.presentation.rememberStrings
 import org.testarossa.portfolio.core.presentation.theme.ExpandPadding
-import org.testarossa.portfolio.core.presentation.theme.MediumPadding
 import org.testarossa.portfolio.core.presentation.utils.isCompactHeight
 import org.testarossa.portfolio.portfolio.presentation.navigation_bar.component.NavigationBarRailItem
 import org.testarossa.portfolio.portfolio.presentation.navigation_bar.component.SocialButtons
@@ -31,14 +29,15 @@ fun NavigationBarRail(
     currentRoute: Route,
     onNavigateTo: (Route) -> Unit
 ) {
+    val localString = rememberStrings()
     Column(
         modifier = if (isCompactHeight()) modifier.verticalScroll(rememberScrollState()) else modifier,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         if (isExpanded) {
             Text(
-                text = stringResource(Res.string.my_name),
-                style = MaterialTheme.typography.headlineMedium,
+                text = localString.get("my_name"),
+                style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Bold),
                 color = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.padding(top = ExpandPadding).align(Alignment.CenterHorizontally)
             )
@@ -60,7 +59,7 @@ fun NavigationBarRail(
                 isExpanded = isExpanded,
                 isSelected = currentRoute == destination.route,
                 imageVector = destination.icon,
-                label = stringResource(destination.label),
+                label = localString.get(destination.label),
                 onClick = { onNavigateTo(destination.route) }
             )
         }

@@ -5,6 +5,9 @@ import androidx.compose.runtime.Composable
 import androidx.window.core.layout.WindowHeightSizeClass
 import androidx.window.core.layout.WindowSizeClass
 import androidx.window.core.layout.WindowWidthSizeClass
+import org.testarossa.portfolio.core.presentation.utils.DeviceConfiguration.MOBILE_LANDSCAPE
+import org.testarossa.portfolio.core.presentation.utils.DeviceConfiguration.TABLET_LANDSCAPE
+import org.testarossa.portfolio.core.presentation.utils.DeviceConfiguration.TABLET_PORTRAIT
 
 @Composable
 fun isDesktopSize(): Boolean {
@@ -20,7 +23,6 @@ fun isCompactWidth(): Boolean {
 fun isCompactHeight(): Boolean {
     return currentWindowAdaptiveInfo().windowSizeClass.windowHeightSizeClass == WindowHeightSizeClass.COMPACT
 }
-
 
 /**
  * Build adaptive content based on the window size class.

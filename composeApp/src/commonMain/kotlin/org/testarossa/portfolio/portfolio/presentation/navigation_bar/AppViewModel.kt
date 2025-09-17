@@ -3,10 +3,15 @@ package org.testarossa.portfolio.portfolio.presentation.navigation_bar
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import org.testarossa.portfolio.core.presentation.BaseViewModel
+import org.testarossa.portfolio.core.presentation.LocalizationManager
 import org.testarossa.portfolio.core.presentation.utils.stateWhileSubscribed
 
 
@@ -19,7 +24,7 @@ class AppViewModel (
     private val _state = MutableStateFlow(AppState())
     val state = _state
         .onStart {
-
+            observeLanguage()
         }.stateWhileSubscribed(viewModelScope, _state.value)
 
 
@@ -31,5 +36,14 @@ class AppViewModel (
                 is AppAction.OnRouteChange -> _state.update { it.copy(currentRoute = action.route) }
             }
         }
+    }
+
+    private fun observeLanguage(){
+        state
+            .map { it.currentLanguage }
+            .distinctUntilChanged()
+            .onEach { language ->
+                LocalizationManager.load(language)
+            }.launchIn(viewModelScope)
     }
 }

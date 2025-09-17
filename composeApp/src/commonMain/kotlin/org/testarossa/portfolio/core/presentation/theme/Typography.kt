@@ -7,6 +7,8 @@ import androidx.compose.ui.text.font.FontWeight
 import myportfolio.composeapp.generated.resources.Res
 import myportfolio.composeapp.generated.resources.inter_400
 import myportfolio.composeapp.generated.resources.inter_500
+import myportfolio.composeapp.generated.resources.inter_700
+import myportfolio.composeapp.generated.resources.inter_900
 import org.jetbrains.compose.resources.Font
 
 val Inter @Composable get() = FontFamily(
@@ -17,6 +19,15 @@ val Inter @Composable get() = FontFamily(
     Font(
         resource = Res.font.inter_500,
         weight = FontWeight.Medium
+    ),
+
+    Font(
+        resource = Res.font.inter_700,
+        weight = FontWeight.Bold
+    ),
+    Font(
+        resource = Res.font.inter_900,
+        weight = FontWeight.Black
     ),
 )
 val baseline = Typography()

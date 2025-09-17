@@ -8,6 +8,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import org.jetbrains.compose.resources.stringResource
 import org.testarossa.portfolio.app.Route
+import org.testarossa.portfolio.core.presentation.rememberStrings
 import org.testarossa.portfolio.portfolio.presentation.navigation_bar.component.BottomNavigationBarItem
 
 @Composable
@@ -16,6 +17,8 @@ fun BottomNavigationBar(
     currentRoute: Route,
     onNavigateTo: (Route) -> Unit
 ) {
+
+    val localString = rememberStrings()
     Row(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically,
@@ -26,7 +29,7 @@ fun BottomNavigationBar(
                 modifier = Modifier.fillMaxHeight().weight(1f),
                 selected = currentRoute == destination.route,
                 imageVector = destination.icon,
-                label = stringResource(destination.label),
+                label = localString.get(destination.label),
                 onClick = { onNavigateTo(destination.route) }
             )
         }

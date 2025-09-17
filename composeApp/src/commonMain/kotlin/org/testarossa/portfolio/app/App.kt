@@ -3,7 +3,6 @@ package org.testarossa.portfolio.app
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
@@ -23,6 +22,7 @@ import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -44,10 +44,13 @@ import org.testarossa.portfolio.core.presentation.utils.getAsyncImageLoader
 import org.testarossa.portfolio.core.presentation.utils.isCompactHeight
 import org.testarossa.portfolio.core.presentation.utils.isCompactWidth
 import org.testarossa.portfolio.core.presentation.utils.navigateToScreen
+import org.testarossa.portfolio.portfolio.presentation.about.AboutScreen
 import org.testarossa.portfolio.portfolio.presentation.home.HomeScreenRoot
 import org.testarossa.portfolio.portfolio.presentation.navigation_bar.AppAction
+import org.testarossa.portfolio.portfolio.presentation.navigation_bar.AppState
 import org.testarossa.portfolio.portfolio.presentation.navigation_bar.AppViewModel
 import org.testarossa.portfolio.portfolio.presentation.navigation_bar.BottomNavigationBar
+import org.testarossa.portfolio.portfolio.presentation.navigation_bar.Language
 import org.testarossa.portfolio.portfolio.presentation.navigation_bar.NavigationBarRail
 
 @OptIn(ExperimentalSharedTransitionApi::class)
@@ -70,7 +73,7 @@ fun App(
     }
 
     PortfolioTheme(darkTheme = state.isDarkMode) {
-        val currentRoute =  state.currentRoute ?: Route.Home
+        val currentRoute = state.currentRoute ?: Route.Home
         Scaffold(
             bottomBar = {
                 AnimatedVisibility(visible = isCompactWidth()) {
@@ -115,7 +118,25 @@ fun App(
                     ) {
                         Content(
                             modifier = Modifier.weight(1f).fillMaxHeight(),
-                            navController = navController
+                            navController = navController,
+                            state = state,
+                            onViewWork = {
+                                appViewModel.onAction(AppAction.OnRouteChange(Route.Resume))
+                            },
+                            onChangeTheme = { isDarkMode ->
+                                appViewModel.onAction(
+                                    AppAction.OnDarkModeChange(
+                                        isDarkMode
+                                    )
+                                )
+                            },
+                            onChangeLanguage = { language ->
+                                appViewModel.onAction(
+                                    AppAction.OnLanguageChange(
+                                        language
+                                    )
+                                )
+                            },
                         )
                     }
                 },
@@ -130,14 +151,50 @@ fun App(
                     ) {
                         Content(
                             modifier = Modifier.weight(1f).fillMaxHeight(),
-                            navController = navController
+                            navController = navController,
+                            state = state,
+                            onViewWork = {
+                                appViewModel.onAction(AppAction.OnRouteChange(Route.Resume))
+                            },
+                            onChangeTheme = { isDarkMode ->
+                                appViewModel.onAction(
+                                    AppAction.OnDarkModeChange(
+                                        isDarkMode
+                                    )
+                                )
+                            },
+                            onChangeLanguage = { language ->
+                                appViewModel.onAction(
+                                    AppAction.OnLanguageChange(
+                                        language
+                                    )
+                                )
+                            },
                         )
                     }
                 },
                 compactContent = {
                     Content(
                         modifier = rootModifier,
-                        navController = navController
+                        navController = navController,
+                        state = state,
+                        onViewWork = {
+                            appViewModel.onAction(AppAction.OnRouteChange(Route.Resume))
+                        },
+                        onChangeTheme = { isDarkMode ->
+                            appViewModel.onAction(
+                                AppAction.OnDarkModeChange(
+                                    isDarkMode
+                                )
+                            )
+                        },
+                        onChangeLanguage = { language ->
+                            appViewModel.onAction(
+                                AppAction.OnLanguageChange(
+                                    language
+                                )
+                            )
+                        },
                     )
                 }
             )
@@ -154,11 +211,8 @@ private fun NavigationRailContent(
     onNavigateTo: (Route) -> Unit,
     content: @Composable RowScope.() -> Unit
 ) {
-
-
     Row(
-        modifier = modifier,
-        horizontalArrangement = Arrangement.spacedBy(12.dp)
+        modifier = modifier
     ) {
         NavigationBarRail(
             modifier = Modifier
@@ -182,7 +236,11 @@ private fun NavigationRailContent(
 @Composable
 private fun Content(
     modifier: Modifier = Modifier,
-    navController: NavHostController
+    navController: NavHostController,
+    state: AppState,
+    onViewWork: () -> Unit,
+    onChangeTheme: (isDarkMode: Boolean) -> Unit,
+    onChangeLanguage: (language: Language) -> Unit,
 ) {
     NavHost(
         modifier = modifier,
@@ -190,12 +248,10 @@ private fun Content(
         startDestination = Route.Home
     ) {
         composable<Route.Home> {
-            HomeScreenRoot()
+            HomeScreenRoot(onViewProject = onViewWork)
         }
         composable<Route.About> {
-            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                Text("About")
-            }
+            AboutScreen()
         }
         composable<Route.Resume> {
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
@@ -209,7 +265,14 @@ private fun Content(
         }
         composable<Route.Settings> {
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                Text("Settings")
+                TextButton(
+                    onClick = {
+                        onChangeLanguage(if (state.currentLanguage == Language.EN) Language.VI else Language.EN)
+                    }
+                ) {
+                    Text(state.currentLanguage.name)
+                }
+
             }
         }
     }

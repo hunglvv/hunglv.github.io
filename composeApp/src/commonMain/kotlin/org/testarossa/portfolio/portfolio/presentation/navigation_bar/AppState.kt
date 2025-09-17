@@ -7,5 +7,14 @@ import org.testarossa.portfolio.app.Route
 data class AppState(
     val currentRoute: Route? = null,
     val isDarkMode: Boolean = false,
-    val currentLanguage: String = "en",
+    val currentLanguage: Language = Language.EN,
 )
+
+
+enum class Language(
+    val code: String,
+    val displayName: String
+) {
+    EN("en", "English"),
+    VI("vn", "Tiếng Việt")
+}
