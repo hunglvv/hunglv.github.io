@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<resources>
+    <string name="mobile_development">Mobile Development</string>
+    <string name="kotlin">Kotlin</string>
+    <string name="java">Java</string>
+    <string name="android_sdk">Android SDK</string>
+    <string name="jetpack_compose">Jetpack Compose</string>
+    <string name="architecture">Architecture &amp; Patterns</string>
+    <string name="mvvm">MVVM</string>
+    <string name="mvi">MVI</string>
+    <string name="clean_architecture">Clean Architecture</string>
+    <string name="dependency_injection">Dependency Injection</string>
+    <string name="data_management">Data Management</string>
+    <string name="room">Room Database</string>
+    <string name="data_store">Data Store</string>
+    <string name="retrofit">Retrofit</string>
+    <string name="coroutine">Coroutines</string>
+    <string name="backend">Backend &amp; Services</string>
+    <string name="firebase">Firebase</string>
+    <string name="rest">REST APIs</string>
+    <string name="websocket">WebSocket</string>
+    <string name="ui_ux">UI/UX Design</string>
+    <string name="material_design">Material Design</string>
+    <string name="custom_view">Custom Views</string>
+    <string name="animation">Animations</string>
+    <string name="accessibility">Accessibility</string>
+    <string name="testing">Testing &amp; Quality</string>
+    <string name="unit_test">Unit Testing</string>
+    <string name="espresso">Espresso</string>
+    <string name="mockito">Mockito</string>
+    <string name="code_review">Code Review</string>
+    <string name="git">Git &amp; GitHub</string>
+    <string name="android_studio">Android Studio</string>
+    <string name="postman">Postman</string>
+    <string name="figma">Figma</string>
+    <string name="clickup">Clickup</string>
+    <string name="intellij">IntelliJ</string>
+    <string name="progress">%1$d%</string>
+</resources>

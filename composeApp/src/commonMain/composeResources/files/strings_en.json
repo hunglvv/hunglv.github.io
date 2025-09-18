@@ -1,7 +1,7 @@
 {
   "home": "Home",
   "about": "About",
-  "resume": "Resume",
+  "resume": "Projects",
   "skill": "Skills",
   "settings": "Settings",
   "my_name": "HungLV",
@@ -24,8 +24,6 @@
   "projects": "Projects",
   "downloads": "Downloads",
   "view": "View",
-  "core_skill": "Core skills",
-  "all_skill": "All skills",
   "your_name": "Your name",
   "subject": "Subject",
   "message": "Message",
@@ -37,6 +35,18 @@
   "years_experience": "Years Experience",
   "my_download": "50M+",
   "total_projects": "25+",
-  "total_years": "5+"
-
+  "total_years": "5+",
+  "skill_expertise": "Skills & Expertise",
+  "tool_tech": "Tools & Technologies",
+  "skill_overview": "A comprehensive overview of my technical skills and proficiency levels in various Android development technologies and tools.",
+  "fan_description": "Built entertainment apps with collections of fan sounds, white noise, asmr triggered by user actions.Added features like sound looping, favorites, and volume control, swipe to watch videos like reels",
+  "stickman_description": "An app that lets users create stickman animations frame-by-frame with onion-skin support. Supporting export to GIF/MP4",
+  "thermal_description": "Implemented a camera filter app that simulates thermal vision using OpenGL shaders and real-time color mapping.",
+  "prank_description": "Built entertainment apps with collections of prank sounds (air horn, siren, fart, etc.) triggered by user actions. Sounds can created by Text to Speech, Voice Change",
+  "charging_description": "Created an app that displays dynamic animations and battery statistics when the device is charging",
+  "plant_description": "Built a mobile app that identifies plants from photos using AI server and external plant recognition APIs.",
+  "compass_description": "Digital compass app displaying direction, degrees, and coordinates using magnetometer and accelerometer sensors.",
+  "stamp_description": "Developed a camera/gallery tool to apply custom timestamps, watermarks, and location info onto photos and videos.",
+  "magnify_description": "Created a magnifier app with real-time zoom and sharpening filters for text and objects.",
+  "renai_description": "Fun photo-editing app that swaps user’s eyes/mouth into preset templates (e.g., classic paintings, memes)"
 }

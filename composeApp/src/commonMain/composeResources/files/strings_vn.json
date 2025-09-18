@@ -1,7 +1,7 @@
 {
   "home": "Trang chủ",
   "about": "Thông tin",
-  "resume": "Hồ sơ",
+  "resume": "Sản phẩm",
   "skill": "Kỹ năng",
   "settings": "Cài đặt",
   "my_name": "HungLV",
@@ -24,8 +24,6 @@
   "projects": "Sản phẩm",
   "downloads": "lượt tải",
   "view": "Xem",
-  "core_skill": "Kỹ năng chính",
-  "all_skill": "Tất cả",
   "your_name": "Tên của bạn",
   "subject": "Chủ đề",
   "message": "Lời nhắn",
@@ -37,6 +35,18 @@
   "years_experience": "năm kình nghiệm",
   "my_download": "Hàng triệu",
   "total_projects": "25+",
-  "total_years": "5+"
-
+  "total_years": "5+",
+  "skill_expertise": "Kỹ năng & Chuyên môn",
+  "tool_tech": "Công cụ & Công nghệ",
+  "skill_overview": "Tổng quan toàn diện về kỹ thuật và trình độ thành thạo của tôi trong các công nghệ và công cụ phát triển Android khác nhau.",
+  "fan_description": "Ứng dụng giải trí được xây dựng với bộ sưu tập âm thanh quạt, tiếng ồn trắng, asmr được kích hoạt bởi hành động của người dùng. Thêm các tính năng như lặp lại âm thanh, mục yêu thích và điều khiển âm lượng, vuốt để xem video như cuộn phim",
+  "stickman_description": "Ứng dụng cho phép người dùng tạo đoạn hoạt ảnh theo từng khung hình, hỗ trợ vẽ trên nền. Hỗ trợ xuất sang GIF và MP4",
+  "thermal_description": "Ứng dụng bộ lọc camera mô phỏng tầm nhìn nhiệt bằng trình đổ bóng OpenGL và ánh xạ màu theo thời gian thực.",
+  "prank_description": "Ứng dụng giải trí được xây dựng với bộ sưu tập âm thanh vui nhộn (còi hơi, còi báo động, tiếng xì hơi, v.v.) được kích hoạt bởi hành động của người dùng. Âm thanh có thể được tạo ra bằng tính năng Chuyển văn bản thành giọng nói, Thay đổi giọng nói",
+  "charging_description": "Ứng dụng hiển thị hình ảnh động và số liệu thống kê pin khi thiết bị đang sạc",
+  "plant_description": "Xây dựng ứng dụng di động có thể nhận dạng thực vật từ ảnh bằng máy chủ AI và API nhận dạng thực vật bên ngoài.",
+  "compass_description": "Ứng dụng la bàn kỹ thuật số hiển thị hướng, độ và tọa độ bằng cảm biến từ kế và cảm biến gia tốc kế.",
+  "stamp_description": "Ứng dụng công cụ máy ảnh/thư viện để áp dụng dấu thời gian, watermark và thông tin vị trí tùy chỉnh vào ảnh và video.",
+  "magnify_description": "Ứng dụng kính lúp có chức năng phóng to theo thời gian thực và bộ lọc làm sắc nét cho văn bản và đối tượng.",
+  "renai_description": "Ứng dụng chỉnh sửa ảnh thú vị giúp hoán đổi mắt/miệng của người dùng thành các mẫu có sẵn (ví dụ: tranh cổ điển, ảnh chế)"
 }

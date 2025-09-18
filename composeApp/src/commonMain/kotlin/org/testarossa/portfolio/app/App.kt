@@ -53,6 +53,7 @@ import org.testarossa.portfolio.portfolio.presentation.navigation_bar.BottomNavi
 import org.testarossa.portfolio.portfolio.presentation.navigation_bar.Language
 import org.testarossa.portfolio.portfolio.presentation.navigation_bar.NavigationBarRail
 import org.testarossa.portfolio.portfolio.presentation.setting.SettingScreenRoot
+import org.testarossa.portfolio.portfolio.presentation.skill.SkillScreenRoot
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
@@ -260,9 +261,7 @@ private fun Content(
             }
         }
         composable<Route.Skills> {
-            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                Text("Skills")
-            }
+            SkillScreenRoot()
         }
         composable<Route.Settings> {
             SettingScreenRoot(

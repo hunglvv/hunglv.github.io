@@ -29,7 +29,7 @@ fun DarkModeSwitch(
         animationSpec = tween(200)
     )
     val color by animateColorAsState(
-        targetValue = if (isChecked) MaterialTheme.colorScheme.tertiary else MaterialTheme.colorScheme.onSurface,
+        targetValue = if (isChecked) MaterialTheme.colorScheme.tertiary else MaterialTheme.colorScheme.secondaryContainer,
         label = "",
         animationSpec = tween(200)
     )
@@ -37,14 +37,15 @@ fun DarkModeSwitch(
         modifier = modifier
             .clip(RoundedCornerShape(28.dp))
             .background(color)
-            .padding(vertical = 3.5.dp)
             .clickable(onClick = { onCheckedChange(!isChecked) })
+            .padding(vertical = 3.5.dp)
     ) {
         Box(
             modifier = Modifier
                 .padding(start = paddingStart)
                 .size(21.dp)
-                .background(MaterialTheme.colorScheme.onPrimary, CircleShape)
+                .clip(CircleShape)
+                .background(MaterialTheme.colorScheme.inversePrimary)
         )
     }
 }
