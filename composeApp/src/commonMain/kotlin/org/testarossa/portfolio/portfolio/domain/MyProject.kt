@@ -32,7 +32,7 @@ val MY_PROJECTS = listOf(
     MyProject(
         "Charging Animation",
         "charging_description",
-        listOf("Kotlin", "MVVM", "Data Binding", "Service", "Lottie", "Retrofit"),
+        listOf("Kotlin", "MVVM", "Data Binding", "Service", "Lottie", "Retrofit", "Work Manager"),
         "files/charging/img_%d.webp",
         5
     ),

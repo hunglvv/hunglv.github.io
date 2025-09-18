@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material3.Icon
@@ -56,6 +57,7 @@ fun SettingScreenRoot(
         Box(
             modifier = Modifier
                 .padding(horizontal = LargePadding)
+                .widthIn(max = 700.dp)
                 .fillMaxWidth()
                 .background(
                     MaterialTheme.colorScheme.surfaceContainerHighest,
@@ -90,6 +92,7 @@ fun SettingScreenRoot(
         Box(
             modifier = Modifier
                 .padding(horizontal = LargePadding)
+                .widthIn(max = 700.dp)
                 .fillMaxWidth()
                 .clip(MaterialTheme.shapes.medium)
                 .background(

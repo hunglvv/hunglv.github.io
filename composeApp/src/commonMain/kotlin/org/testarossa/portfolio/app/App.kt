@@ -3,7 +3,6 @@ package org.testarossa.portfolio.app
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
@@ -21,12 +20,9 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -52,6 +48,7 @@ import org.testarossa.portfolio.portfolio.presentation.navigation_bar.AppViewMod
 import org.testarossa.portfolio.portfolio.presentation.navigation_bar.BottomNavigationBar
 import org.testarossa.portfolio.portfolio.presentation.navigation_bar.Language
 import org.testarossa.portfolio.portfolio.presentation.navigation_bar.NavigationBarRail
+import org.testarossa.portfolio.portfolio.presentation.resume.ResumeScreenRoot
 import org.testarossa.portfolio.portfolio.presentation.setting.SettingScreenRoot
 import org.testarossa.portfolio.portfolio.presentation.skill.SkillScreenRoot
 
@@ -256,9 +253,7 @@ private fun Content(
             AboutScreen()
         }
         composable<Route.Resume> {
-            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                Text("Resume")
-            }
+            ResumeScreenRoot()
         }
         composable<Route.Skills> {
             SkillScreenRoot()

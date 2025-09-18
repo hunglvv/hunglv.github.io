@@ -25,8 +25,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.window.core.layout.WindowWidthSizeClass
 import org.testarossa.portfolio.core.presentation.rememberStrings
+import org.testarossa.portfolio.core.presentation.theme.ExpandPadding
 import org.testarossa.portfolio.core.presentation.theme.MediumPadding
-import org.testarossa.portfolio.core.presentation.theme.Shapes
 import org.testarossa.portfolio.core.presentation.utils.LocalImage
 import org.testarossa.portfolio.portfolio.domain.badges
 import org.testarossa.portfolio.portfolio.presentation.about.component.MyBadge
@@ -47,22 +47,21 @@ fun AboutScreen() {
         else -> 3
     }
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxSize().padding(ExpandPadding),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
             text = localString.get("about"),
             style = MaterialTheme.typography.headlineSmall,
             color = MaterialTheme.colorScheme.onSurface,
-            modifier = Modifier.padding(top = MediumPadding).align(Alignment.CenterHorizontally)
+            modifier = Modifier.align(Alignment.CenterHorizontally)
         )
 
         LazyVerticalGrid(
             columns = GridCells.Fixed(column),
             modifier = Modifier
                 .fillMaxWidth()
-                .weight(1f)
-                .padding(MediumPadding),
+                .weight(1f),
             horizontalArrangement = Arrangement.spacedBy(MediumPadding),
             verticalArrangement = Arrangement.spacedBy(MediumPadding)
         ) {

@@ -139,8 +139,8 @@ fun HomeScreenRoot(
 
         Text(
             text = "Made by Compose Multiplatform",
-            style = MaterialTheme.typography.bodyLarge,
-            color = MaterialTheme.colorScheme.primary,
+            style = MaterialTheme.typography.labelMedium,
+            color = MaterialTheme.colorScheme.scrim,
             modifier = Modifier.padding(MediumPadding).align(Alignment.BottomEnd)
         )
     }
