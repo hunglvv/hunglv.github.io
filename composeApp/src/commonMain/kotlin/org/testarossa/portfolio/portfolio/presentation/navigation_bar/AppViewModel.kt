@@ -15,9 +15,7 @@ import org.testarossa.portfolio.core.presentation.LocalizationManager
 import org.testarossa.portfolio.core.presentation.utils.stateWhileSubscribed
 
 
-class AppViewModel (
-
-): BaseViewModel(){
+class AppViewModel (): BaseViewModel(){
     private val _events = Channel<AppAction>()
     val event = _events.receiveAsFlow()
 

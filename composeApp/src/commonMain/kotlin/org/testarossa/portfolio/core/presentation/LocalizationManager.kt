@@ -17,11 +17,6 @@ import org.testarossa.portfolio.portfolio.presentation.navigation_bar.Language
 @Composable
 fun rememberStrings(): LocalizationManager {
     val locale by LocalizationManager.locale.collectAsStateWithLifecycle()
-    LaunchedEffect(locale){
-        if (LocalizationManager.checkLoaded().not()){
-            LocalizationManager.load(locale)
-        }
-    }
     return remember(locale) { LocalizationManager }
 }
 
@@ -48,6 +43,10 @@ object LocalizationManager {
     }
 
     fun get(key: String, vararg args: Any?): String {
+        val loaded = checkLoaded()
+        if (!loaded){
+            return "Loading resources..."
+        }
         val map = localeMap[_locale.value.code]!!
         val template = map[key] ?: key
         return formatTemplate(template, args)

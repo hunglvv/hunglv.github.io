@@ -2,6 +2,7 @@ package org.testarossa.portfolio.portfolio.presentation.resume.component
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.icons.Icons
@@ -18,6 +19,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.window.Dialog
 import kotlinx.coroutines.launch
+import org.testarossa.portfolio.core.presentation.theme.ExpandPadding
+import org.testarossa.portfolio.core.presentation.theme.LargePadding
 import org.testarossa.portfolio.core.presentation.utils.LocalImage
 import org.testarossa.portfolio.portfolio.domain.MyProject
 
@@ -34,7 +37,7 @@ fun PreviewDialog(
         Box {
             HorizontalPager(
                 state = pagerState,
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier.padding(horizontal = LargePadding).fillMaxSize(),
             ) { page ->
                 val currentThumb =
                     remember(project) { project.pathImage.replace("%d", "${page + 1}") }
