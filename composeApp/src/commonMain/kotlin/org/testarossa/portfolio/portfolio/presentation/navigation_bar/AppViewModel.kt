@@ -1,14 +1,12 @@
 package org.testarossa.portfolio.portfolio.presentation.navigation_bar
 
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
-import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import org.testarossa.portfolio.core.presentation.BaseViewModel
 import org.testarossa.portfolio.core.presentation.LocalizationManager
@@ -16,8 +14,6 @@ import org.testarossa.portfolio.core.presentation.utils.stateWhileSubscribed
 
 
 class AppViewModel (): BaseViewModel(){
-    private val _events = Channel<AppAction>()
-    val event = _events.receiveAsFlow()
 
     private val _state = MutableStateFlow(AppState())
     val state = _state

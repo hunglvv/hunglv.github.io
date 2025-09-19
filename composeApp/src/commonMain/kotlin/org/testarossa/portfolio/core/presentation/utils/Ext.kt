@@ -10,7 +10,6 @@ import coil3.memory.MemoryCache
 import coil3.util.DebugLogger
 import coil3.util.Logger
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow

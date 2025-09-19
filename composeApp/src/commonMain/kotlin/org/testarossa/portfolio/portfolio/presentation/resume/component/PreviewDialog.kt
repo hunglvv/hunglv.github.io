@@ -19,7 +19,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.window.Dialog
 import kotlinx.coroutines.launch
-import org.testarossa.portfolio.core.presentation.theme.ExpandPadding
 import org.testarossa.portfolio.core.presentation.theme.LargePadding
 import org.testarossa.portfolio.core.presentation.utils.LocalImage
 import org.testarossa.portfolio.portfolio.domain.MyProject

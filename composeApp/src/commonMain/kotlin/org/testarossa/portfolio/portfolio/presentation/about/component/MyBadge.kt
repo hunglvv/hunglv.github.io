@@ -16,12 +16,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import org.testarossa.portfolio.core.presentation.theme.MediumPadding
 import org.testarossa.portfolio.core.presentation.theme.NormalPadding
-import org.testarossa.portfolio.core.presentation.theme.Shapes
-
 
 
 @Composable

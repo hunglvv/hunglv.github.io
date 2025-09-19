@@ -14,7 +14,6 @@ import androidx.compose.ui.text.font.FontWeight
 import org.testarossa.portfolio.core.presentation.rememberStrings
 import org.testarossa.portfolio.core.presentation.theme.MediumPadding
 import org.testarossa.portfolio.core.presentation.theme.NormalPadding
-import org.testarossa.portfolio.core.presentation.theme.Shapes
 import org.testarossa.portfolio.core.presentation.theme.SmallPadding
 
 private val MY_TECHNOLOGIES = listOf(

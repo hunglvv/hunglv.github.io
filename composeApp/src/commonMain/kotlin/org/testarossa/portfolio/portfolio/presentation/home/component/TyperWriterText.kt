@@ -1,7 +1,5 @@
 package org.testarossa.portfolio.portfolio.presentation.home.component
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -13,14 +11,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import kotlinx.coroutines.delay
-import org.testarossa.portfolio.core.presentation.rememberStrings
-import org.testarossa.portfolio.core.presentation.theme.MediumPadding
+import org.testarossa.portfolio.core.presentation.LocalizationManager
 
 @Composable
 fun TyperWriterText(
+    localString: LocalizationManager,
     modifier: Modifier = Modifier,
 ){
-    val localString = rememberStrings()
+
     var isFirstText by remember {
         mutableStateOf(true)
     }

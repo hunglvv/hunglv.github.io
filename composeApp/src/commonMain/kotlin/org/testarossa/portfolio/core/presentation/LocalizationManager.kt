@@ -1,7 +1,6 @@
 package org.testarossa.portfolio.core.presentation
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -29,11 +28,6 @@ object LocalizationManager {
     private val _locale = MutableStateFlow(Language.EN)
     val locale = _locale.asStateFlow()
 
-
-    fun checkLoaded(): Boolean {
-        return localeMap.containsKey(_locale.value.code)
-    }
-
     suspend fun load(locale: Language) {
         _locale.value = locale
         val resourcePath = "files/strings_${locale.code}.json"
@@ -43,9 +37,9 @@ object LocalizationManager {
     }
 
     fun get(key: String, vararg args: Any?): String {
-        val loaded = checkLoaded()
+        val loaded = localeMap.containsKey(_locale.value.code)
         if (!loaded){
-            return "Loading resources..."
+            return ""
         }
         val map = localeMap[_locale.value.code]!!
         val template = map[key] ?: key

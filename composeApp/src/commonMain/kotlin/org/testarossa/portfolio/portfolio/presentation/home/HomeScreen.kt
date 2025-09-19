@@ -55,7 +55,10 @@ fun HomeScreenRoot(
 
         Column(
             modifier = Modifier.padding(MediumPadding)
-                .background(MaterialTheme.colorScheme.surface.copy(alpha = 0.7f), MaterialTheme.shapes.medium)
+                .background(
+                    MaterialTheme.colorScheme.surface.copy(alpha = 0.7f),
+                    MaterialTheme.shapes.medium
+                )
                 .padding(horizontal = MediumPadding, vertical = NormalPadding)
                 .align(
                     if (isCompactWidth()) Alignment.BottomStart else Alignment.CenterStart
@@ -76,8 +79,11 @@ fun HomeScreenRoot(
                 color = MaterialTheme.colorScheme.primary,
             )
             Spacer(modifier = Modifier.height(MediumPadding))
-            TyperWriterText()
+
+            TyperWriterText(localString)
+
             Spacer(modifier = Modifier.height(MediumPadding))
+
             Text(
                 text = localString.get("home_overview"),
                 style = MaterialTheme.typography.bodyLarge,
