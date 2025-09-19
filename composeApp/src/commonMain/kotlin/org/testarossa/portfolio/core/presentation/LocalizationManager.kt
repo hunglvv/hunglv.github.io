@@ -28,12 +28,16 @@ object LocalizationManager {
     private val _locale = MutableStateFlow(Language.EN)
     val locale = _locale.asStateFlow()
 
-    suspend fun load(locale: Language) {
+    fun changeLocale(locale: Language) {
         _locale.value = locale
-        val resourcePath = "files/strings_${locale.code}.json"
-        val bytes = Res.readBytes(resourcePath)
-        val json = json.parseToJsonElement(bytes.decodeToString()) as JsonObject
-        localeMap[locale.code] = json.mapValues { it.value.jsonPrimitive.content }
+    }
+    suspend fun load() {
+        Language.entries.forEach { language ->
+            val resourcePath = "files/strings_${language.code}.json"
+            val bytes = Res.readBytes(resourcePath)
+            val json = json.parseToJsonElement(bytes.decodeToString()) as JsonObject
+            localeMap[language.code] = json.mapValues { it.value.jsonPrimitive.content }
+        }
     }
 
     fun get(key: String, vararg args: Any?): String {

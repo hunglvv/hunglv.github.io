@@ -13,7 +13,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import org.testarossa.portfolio.app.Route
 import org.testarossa.portfolio.core.presentation.rememberStrings
@@ -38,7 +37,7 @@ fun NavigationBarRail(
         if (isExpanded) {
             Text(
                 text = localString.get("my_name"),
-                style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Bold),
+                style = MaterialTheme.typography.headlineLarge,
                 color = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.padding(top = ExpandPadding).align(Alignment.CenterHorizontally)
             )

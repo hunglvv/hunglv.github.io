@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import org.testarossa.portfolio.core.presentation.BaseViewModel
 import org.testarossa.portfolio.core.presentation.LocalizationManager
 import org.testarossa.portfolio.core.presentation.utils.stateWhileSubscribed
@@ -21,6 +22,11 @@ class AppViewModel (): BaseViewModel(){
             observeLanguage()
         }.stateWhileSubscribed(viewModelScope, _state.value)
 
+    init {
+        viewModelScope.launch {
+            LocalizationManager.load()
+        }
+    }
 
     fun onAction(action: AppAction) {
         onDebounceTask {
@@ -37,7 +43,7 @@ class AppViewModel (): BaseViewModel(){
             .map { it.currentLanguage }
             .distinctUntilChanged()
             .onEach { language ->
-                LocalizationManager.load(language)
+                LocalizationManager.changeLocale(language)
             }.launchIn(viewModelScope)
     }
 }

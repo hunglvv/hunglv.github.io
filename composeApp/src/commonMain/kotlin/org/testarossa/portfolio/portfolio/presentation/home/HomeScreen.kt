@@ -26,7 +26,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalUriHandler
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import org.testarossa.portfolio.core.presentation.rememberStrings
 import org.testarossa.portfolio.core.presentation.theme.LargePadding
@@ -75,7 +74,7 @@ fun HomeScreenRoot(
             Spacer(modifier = Modifier.height(NormalPadding))
             Text(
                 text = localString.get("my_full_name"),
-                style = MaterialTheme.typography.displayMedium.copy(fontWeight = FontWeight.Black),
+                style = MaterialTheme.typography.displayMedium,
                 color = MaterialTheme.colorScheme.primary,
             )
             Spacer(modifier = Modifier.height(MediumPadding))

@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import myportfolio.composeapp.generated.resources.Res
+import myportfolio.composeapp.generated.resources.dancingscript_bold
 import myportfolio.composeapp.generated.resources.inter_400
 import myportfolio.composeapp.generated.resources.inter_500
 import myportfolio.composeapp.generated.resources.inter_700
@@ -30,12 +31,20 @@ val Inter @Composable get() = FontFamily(
         weight = FontWeight.Black
     ),
 )
+
+val SpecialFont @Composable get() = FontFamily(
+    Font(
+        resource = Res.font.dancingscript_bold,
+        weight = FontWeight.Bold
+    )
+)
+
 val baseline = Typography()
 val Typography: Typography @Composable get() = Typography(
     displayLarge = baseline.displayLarge.copy(fontFamily = Inter),
-    displayMedium = baseline.displayMedium.copy(fontFamily = Inter),
+    displayMedium = baseline.displayMedium.copy(fontFamily = SpecialFont),    //
     displaySmall = baseline.displaySmall.copy(fontFamily = Inter),
-    headlineLarge = baseline.headlineLarge.copy(fontFamily = Inter),
+    headlineLarge = baseline.headlineLarge.copy(fontFamily = SpecialFont), //
     headlineMedium = baseline.headlineMedium.copy(fontFamily = Inter),
     headlineSmall = baseline.headlineSmall.copy(fontFamily = Inter),
     titleLarge = baseline.titleLarge.copy(fontFamily = Inter),
